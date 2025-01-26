@@ -1,6 +1,7 @@
 import BotonBasico from '../components/BotonBasico';
 import '../index.css';
 
+
 export default function Home(){
     
     return(
@@ -32,8 +33,8 @@ export default function Home(){
             <p className='tw-text-center'>Únete y empieza a practicar con nuestras preguntas diarias. Compite con tus compañeros en los rankings globales y semanales. ¡Desarrolla todo tu potencial!</p>           
             <img className="tw-mt-6" src="/home/foto7.png" width={'60%'} alt="grupo de estudiantes"></img>
         </div>
-        <div className='tw-flex tw-flex-col tw-mt-8 tw-items-center'> 
-            <BotonBasico tipo="contained" texto="Crea tu perfil con nosotros"></BotonBasico>           
+        <div className='tw-flex tw-flex-col tw-mt-10 tw-items-center'> 
+            <BotonBasico tipo="contained" ruta="/registro" texto="Crea tu perfil con nosotros"></BotonBasico>           
         </div>
         <div className='tw-flex tw-flex-col tw-mt-5 tw-mb-10 tw-items-center'>            
             <BotonBasico tipo="outlined" texto="Ya tengo una cuenta"></BotonBasico>

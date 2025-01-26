@@ -1,11 +1,9 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-export default function BotonBasico({tipo, texto}) {
-  return (
-    <Stack spacing={2} direction="row">      
-      <Button variant={tipo}>{texto}</Button>      
-    </Stack>
+export default function BotonBasico({tipo, texto, ruta}) {
+  return (        
+  <Button className="tw-w-64" component={Link} to={ruta} variant={tipo}>{texto}</Button>    
   );
 }
