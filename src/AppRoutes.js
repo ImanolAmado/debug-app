@@ -5,13 +5,9 @@ import Usuario from './pages/Usuario';
 import { Route, Routes } from 'react-router-dom';
 
 
-
-
 export default function AppRoutes() {
 
-
 return (
-
 <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/rankings" element={<Rankings/>}/>

@@ -1,20 +1,23 @@
 import Menu from './components/Menu';
+import Cabecera from './components/Cabecera';
 import AppRoutes from './AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
-import './App.css';
 
 
 function App() {
   return (
 
-    <BrowserRouter>
-   
-    <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        {/* Contenedor principal para las rutas */}
-        <div style={{ flex: 1, overflow: 'auto' }}>
-          <AppRoutes />
-        </div>        
-      <Menu></Menu>             
+    <BrowserRouter>   
+    
+    <div className="tw-flex tw-flex-col tw-h-screen">
+        
+       
+        <div className="tw-flex-1 tw-overflow-auto">
+        <Cabecera></Cabecera>
+        <AppRoutes/>
+        </div>   
+       
+        <Menu/>             
     </div>
     </BrowserRouter>
   );
