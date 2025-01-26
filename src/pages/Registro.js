@@ -2,13 +2,15 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 
 
 export default function Registro(){
 
 
+    const [correcto, setCorrecto] = useState(false);
     // Estado del formulario
     const [formulario, setFormulario] = useState(
         {
@@ -46,27 +48,61 @@ export default function Registro(){
         }
     );
 
+    useEffect(() => {
+
+        // Evitar que se ejecute al renderizar
+        if(correcto===false){
+          return;
+        }
+      
+          axios.post("http://127.0.0.1:8000/api/registro", formulario)
+          .then((response) => {     
+           
+            
+
+                      
+          })
+          .catch((error) => {                
+              
+            
+
+          })
+      
+          .finally(() => {
+            setCorrecto(false);
+          });
+      
+      },[correcto, formulario]);
+
     // Actualiza el estado del formulario    
-    function handleOnChange(event){
-        console.log(event.target.value);
+    function handleOnChange(event){        
         const { value, name } = event.target;    
         setFormulario({...formulario,
         [name]:value });
     }
 
     function handleOnClick(event){       
-        event.preventDefault();
-        console.log("Estoy en handleClick");
+        event.preventDefault();       
         let nombreValido = true;
         let apellidoValido = true;
         let emailValido = true;
         let nicknameValido = true;
         let passwordValido = true;
         let fechaValida = true;
-
-        nombreValido = validarNombre(formulario.nombre);
+       
+        nombreValido = validarNombre(formulario.nombre);        
         apellidoValido = validarApellido(formulario.apellido);
         nicknameValido = validarNickname(formulario.nickname);
+        emailValido = validarEmail(formulario.email);
+        fechaValida = validarFecha(formulario.fecha_nacimiento);
+        passwordValido = validarPassword(formulario.password);
+
+        if(nombreValido===true && apellidoValido===true && nicknameValido===true
+            && emailValido===true && fechaValida===true && passwordValido===true) {
+            setCorrecto(true);
+        }
+       
+
 
     }
 
@@ -74,13 +110,13 @@ export default function Registro(){
     // Establece los estados de error y mensaje de error
     function validarNombre(nombre){
         if(nombre.length < 3 || nombre.length > 100){
-            setError({...error, nombre:true});
-            setMensajeError({...mensajeError, nombre:"Entre 3 y 100 caracteres"});
+        setError((prevError) => ({ ...prevError, nombre: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nombre: "Entre 3 y 100 caracteres" }));
         return false;
 
         } else {
-            setError({...error, nombre:false});
-            setMensajeError({...mensajeError, nombre:""});           
+        setError((prevError) => ({ ...prevError, nombre: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nombre: "" }));           
         return true;
         }   
     }
@@ -89,13 +125,13 @@ export default function Registro(){
     // Establece los estados de error y mensaje de error
     function validarApellido(apellido){
         if(apellido.length < 3 || apellido.length > 100){
-            setError({...error, apellido:true});
-            setMensajeError({...mensajeError, apellido:"Entre 3 y 100 caracteres"});
+        setError((prevError) => ({ ...prevError, apellido: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, apellido: "Entre 3 y 100 caracteres" }));
         return false;
 
         } else {
-            setError({...error, apellido:false});
-            setMensajeError({...mensajeError, apellido:""});           
+        setError((prevError) => ({ ...prevError, apellido: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, apellido: "" }));            
         return true;
         }   
     }
@@ -104,44 +140,117 @@ export default function Registro(){
     // Establece los estados de error y mensaje de error
     function validarNickname(nickname){
         if(nickname.length < 3 || nickname.length > 15){
-            setError({...error, nickname:true});
-            setMensajeError({...mensajeError, nickname:"Entre 3 y 15 caracteres"});
+        setError((prevError) => ({ ...prevError, nickname: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nickname: "Entre 3 y 15 caracteres" }));  
         return false;
 
         } else {
-            setError({...error, nickname:false});
-            setMensajeError({...mensajeError, nickname:""});           
+        setError((prevError) => ({ ...prevError, nickname: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nickname: "" }));            
         return true;
         }   
     }
 
 
     // Función para validar email del formulario
-    // 
+    // // Establece los estados de error y mensaje de error
     function validarEmail(email){
-    if(!email.includes('@')){
-      setErrorEmail('El formato de email es incorrecto');
-    return false;
-    } else {
-        if(email.length < 5 || email.length > 100){
-            setErrorEmail("El email debe tener entre 5 y 100 caracteres");
-          return false;
+        if(!email.includes('@')){
+        setError((prevError) => ({ ...prevError, email: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, email: "Formato incorrecto" }));
+        return false;
+        } else {
+        if(email.length < 5 || email.length > 200){
+        setError((prevError) => ({ ...prevError, email: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, email: "Entre 5 y 200 caracteres" }));
+        return false;
         } 
         else {
-        setErrorEmail("");      
+        setError((prevError) => ({ ...prevError, email: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, email: "" }));         
         return true;
         } 
+        }
     }
-}
 
 
+    // Función para validar fecha del formulario
+    // Usuario debe ser mayor de edad
+    // Establece los estados de error y mensaje de error
+    function validarFecha(fecha){       
+        // Controlamos si la fecha está vacía
+        if (!fecha) {
+        setError((prevError) => ({ ...prevError, fecha_nacimiento: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "El campo fecha es requerido" }));
+        return false;
+        }
+
+        // Se comprueba si el usuario es mayor de edad        
+        let hoy = new Date();
+        let fechaNacimiento = new Date(fecha);
+
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();        
+
+        // Si el usuario es mayor de 18, devolvemos true
+        if (edad > 18) {
+        setError((prevError) => ({ ...prevError, fecha_nacimiento: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "" }));         
+        return true;
+        }
+    
+        // Si es menor de 18, devolvemos false
+        if (edad < 18) {
+        setError((prevError) => ({ ...prevError, fecha_nacimiento: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "Debes de ser mayor de edad" }));
+        return false;
+        }
+    
+        // Si es igual a 18, se comprueba mes y día
+        if (edad === 18) {
+            let mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    
+            if (mes < 0) {
+            setError((prevError) => ({ ...prevError, fecha_nacimiento: true }));
+            setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "Aún eres menor de edad" }));
+            return false;
+            }
+    
+            // Si el mes es igual, se comprueba el día
+            if (mes === 0) {
+            let dia = hoy.getDate() - fechaNacimiento.getDate();
+                if (dia < 0) {
+                setError((prevError) => ({ ...prevError, fecha_nacimiento: true }));
+                setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "Aún eres menor de edad" }));
+                return false;
+                }
+            }
+        }
+    
+        // Si llegamos hasta aquí, la fecha es válida
+        setError((prevError) => ({ ...prevError, fecha_nacimiento: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, fecha_nacimiento: "" }));         
+        return true;
+    }
 
 
+    // Función para validar password del formulario
+    // Establece los estados de error y mensaje de error
+    function validarPassword(password){
+        if(password.length < 6 || password.length > 15){
+        setError((prevError) => ({ ...prevError, password: true }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, password: "Entre 6 y 15 caracteres" }));
+        return false;
 
+        } else {
+        setError((prevError) => ({ ...prevError, password: false }));
+        setMensajeError((prevMensajeError) => ({ ...prevMensajeError, password: "" }));           
+        return true;
+        }   
+    }
+    
 
 return(
 <div>
-
 <Box
       component="form"
       sx={{ '& .MuiTextField-root': { m: 1, width: '30ch' } }}
@@ -149,7 +258,7 @@ return(
       autoComplete="off"
     >
     <div className="tw-text-center tw-mt-4">
-        <h1>Formulario de registro</h1>
+        <h1>Formulario de registro</h1>        
     </div>
 
     
@@ -186,7 +295,8 @@ return(
          <TextField 
           required  
           error={error.email}  
-          helperText={mensajeError.email}        
+          helperText={mensajeError.email}   
+          type="email"     
           id="email"              
           name="email" 
           label="Email" 
@@ -195,7 +305,7 @@ return(
           minLength={5}
           maxLength={200}
           onChange = {handleOnChange}
-          value={formulario.nickname}    
+          value={formulario.email}    
         />           
         
         <TextField 
@@ -214,7 +324,9 @@ return(
         />    
 
         <TextField 
-          required          
+          required 
+          error={error.fecha_nacimiento}  
+          helperText={mensajeError.fecha_nacimiento}         
           type="date"
           id="fecha_nacimiento"              
           name="fecha_nacimiento"                     
@@ -224,7 +336,9 @@ return(
         />    
 
         <TextField
-          required        
+          required    
+          error={error.password}  
+          helperText={mensajeError.password}     
           id="password"
           label="Password"
           type="password"
@@ -232,7 +346,7 @@ return(
           autoComplete="current-password"
           size="small"     
           minLength={6}
-          maxLength={255}
+          maxLength={15}
           onChange = {handleOnChange}
           value={formulario.password} 
         />
