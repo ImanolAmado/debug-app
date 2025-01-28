@@ -11,7 +11,7 @@ export default function Menu() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="tw-flex tw-items-center tw-justify-center tw-border-t-2 border-blue-900">
     <Box 
     sx={{width: { xs: 375, sm: 550, md: 700, lg: 992, xl: 1200, xxl: 1400 } }}>      
       <BottomNavigation
@@ -19,7 +19,7 @@ export default function Menu() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
-          console.log(value);
+         
           
         }}
       >

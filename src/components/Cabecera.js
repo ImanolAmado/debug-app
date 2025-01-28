@@ -10,6 +10,11 @@ import { Link } from 'react-router-dom';
 
 export default function Cabecera() {
 
+
+// Si existen datos en localStorage, el usuario está
+// autenticado
+if (localStorage.getItem("miToken")){
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -17,9 +22,27 @@ export default function Cabecera() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <img src="/debugLogo.png" width={100} alt="imagen logo"></img>
           </Typography>
-          <Button color="inherit"><Link to="/usuario">Login</Link></Button>
+          <Link to={"/usuario"}><button><img className="tw-mr-3 tw-mt-2" src="/avatar1.png" width={40} alt="imagen avatar"></img></button></Link>
         </Toolbar>
       </AppBar>
     </Box>
   );
+}
+
+else {
+
+ return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>         
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <img src="/debugLogo.png" width={100} alt="imagen logo"></img>
+          </Typography>
+          <Button color="inherit"><Link to="/login">Login</Link></Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+}
+
 }

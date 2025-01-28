@@ -2,14 +2,16 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Home from './Home';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Registro(){
 
-
+    const navigate = useNavigate();
     const [correcto, setCorrecto] = useState(false);
     // Estado del formulario
     const [formulario, setFormulario] = useState(
@@ -58,13 +60,24 @@ export default function Registro(){
           axios.post("http://127.0.0.1:8000/api/registro", formulario)
           .then((response) => {     
            
-            
-
+            console.log(response);
+            navigate("/login");
                       
           })
-          .catch((error) => {                
-              
+          .catch((error) => {               
             
+            // Se controla el error lanzado,
+            // nickname o email ya existentes
+            console.log(error.response.request.status);
+            if(error.response.request.status===402){
+              setError((prevError) => ({ ...prevError, nickname: true }));
+              setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nickname: "Error, ese nickname ya existe" })); 
+            }
+            
+            if(error.response.request.status===403){
+              setError((prevError) => ({ ...prevError, email: true }));
+              setMensajeError((prevMensajeError) => ({ ...prevMensajeError, email: "Error, ese email ya existe" })); 
+            }
 
           })
       
@@ -249,6 +262,16 @@ export default function Registro(){
     }
     
 
+// Si el usuario ya está logueado, no le dejamos
+// ver la página de registro
+if (localStorage.getItem("miToken")){
+   return (
+          <Home></Home>
+      );
+}
+
+else {
+
 return(
 <div>
 <Box
@@ -356,9 +379,9 @@ return(
     <div className='tw-flex tw-flex-col tw-mt-10 tw-items-center'> 
         <Button className='tw-w-40' variant='contained' onClick={handleOnClick}>Enviar</Button>           
     </div> 
-
-
 </div>
-
 );
+
+}
+
 }
