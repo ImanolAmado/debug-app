@@ -1,13 +1,11 @@
 import React from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useState } from "react";
-import Partida from '../pages/Partida';
 
 import "../styles.css";
 
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
-    return <div className="timer">Too lale...</div>;
+    return <div className="timer">¡Listo!</div>;
   }
 
   return (
@@ -19,36 +17,28 @@ const renderTime = ({ remainingTime }) => {
   );
 };
 
-export default function CuentaAtras() {
+export default function CuentaAtras({setVerCuentaAtras, setVerPartida}) {
 
-const [showPartida, setShowPartida] = useState(false);
-
-
+ 
   return (
     <div className="App">
-      <h1>
-        CountdownCircleTimer
-        <br />
-        React Component
-      </h1>
+      <h1 className="tw-mt-3">Preparando preguntas...</h1>
       <div className="timer-wrapper">
         <CountdownCircleTimer
           isPlaying
-          duration={10}
+          duration={5}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
           colorsTime={[10, 6, 3, 0]}
           onComplete={() => {
-            <Partida></Partida>
+            setVerCuentaAtras(false);
+            setVerPartida(true);
             return { shouldRepeat: false, delay: 1 }; 
+            
           }}
         >
           {renderTime}
         </CountdownCircleTimer>
-      </div>
-      <p className="info">
-        Change component properties in the code filed on the right to try
-        difference functionalities
-      </p>
+      </div>      
     </div>
   );
 }
