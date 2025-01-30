@@ -5,8 +5,10 @@ import '../index.css';
 
 export default function Home(){
     
+
 // Si existen datos en localStorage, el usuario está
 // autenticado
+
 if (localStorage.getItem("miToken")){
     return(   
         <HomeLogin></HomeLogin>

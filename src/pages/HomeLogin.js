@@ -16,14 +16,16 @@ let fecha = new Date().toLocaleDateString('es',opciones).replace(/ /g,'-')
     
 
 const [verBoton, setVerBoton] = useState(true);
+const [hasJugado, setHasJugado] = useState(false);
 const [verCuentaAtras, setVerCuentaAtras] = useState(false);
 const [verPartida, setVerPartida] = useState(false);
 const [preguntas, setPreguntas] = useState([{}]);
     
+
 // Recuperar datos personales de localStorage
 let datosJson = localStorage.getItem("misdatos");
 let datos = JSON.parse(datosJson); 
-console.log(datos);
+
 
 // Recuperar token de localStorage para llamada Api
 let miToken = "";
@@ -45,11 +47,11 @@ useEffect(() => {
         console.log(preguntas);
         
     })
-    .catch((error) => {             
-        if (error != "AxiosError: Request failed with status code 422")
-        {  
-       
-        }          
+    .catch((error) => {     
+        if(error.response.status){
+        setHasJugado(true);
+        setVerBoton(false);       
+        } 
     })   
 
 },[]);
@@ -66,7 +68,7 @@ return (
 
 <div className="tw-container">
     <div className="tw-mt-4 tw-text-center">
-        <p>Bienvenido otra vez {datos.nombre}</p>
+        <p>Bienvenid@ otra vez {datos.nombre}</p>
         <h1 className="tw-text-2xl tw-mt-3">{fecha}</h1>    
     </div>
 
@@ -86,6 +88,13 @@ return (
     {verPartida ?
     <div>
         <Partida preguntas={preguntas}></Partida>
+    </div> : <></>
+    }
+
+    {/* En caso de que el usuario ya haya jugado */}
+    {hasJugado ?
+    <div>
+        <p>Lo siento, ya has practicado hoy. ¡Vuelve mañana!</p>
     </div> : <></>
     }
 

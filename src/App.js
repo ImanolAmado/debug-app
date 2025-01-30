@@ -9,8 +9,7 @@ function App() {
 
     <BrowserRouter>   
     
-    <div className="tw-flex tw-flex-col tw-h-screen">
-        
+    <div className="tw-flex tw-flex-col tw-h-screen">        
        
         <div className="tw-flex-1 tw-overflow-auto">
         <Cabecera></Cabecera>

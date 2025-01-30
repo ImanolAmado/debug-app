@@ -30,6 +30,7 @@ useEffect(() => {
     )
     .then((response) => {         
         localStorage.removeItem("miToken");  
+        localStorage.removeItem("misdatos"); 
         setHacerLogout(false); 
         navigate(0);
                        

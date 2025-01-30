@@ -26,7 +26,7 @@ export default function CuentaAtras({setVerCuentaAtras, setVerPartida}) {
       <div className="timer-wrapper">
         <CountdownCircleTimer
           isPlaying
-          duration={5}
+          duration={3}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
           colorsTime={[10, 6, 3, 0]}
           onComplete={() => {
