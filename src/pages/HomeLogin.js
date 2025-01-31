@@ -2,6 +2,7 @@ import CuentaAtras from "../components/CuentaAtras";
 import Partida from "./Partida";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loading from 'react-simple-loading';
 
 
 
@@ -20,6 +21,7 @@ const [hasJugado, setHasJugado] = useState(false);
 const [verCuentaAtras, setVerCuentaAtras] = useState(false);
 const [verPartida, setVerPartida] = useState(false);
 const [preguntas, setPreguntas] = useState([{}]);
+const [cargando, setCargando] = useState(true);
     
 
 // Recuperar datos personales de localStorage
@@ -53,9 +55,11 @@ useEffect(() => {
         setVerBoton(false);       
         } 
     })   
+    .finally(() => {
+        setCargando(false);
+    })
 
 },[]);
-
 
 
 function handleOnClick(){
@@ -71,6 +75,15 @@ return (
         <p>Bienvenid@ otra vez {datos.nombre}</p>
         <h1 className="tw-text-2xl tw-mt-3">{fecha}</h1>    
     </div>
+
+    {/* Para evitar que se vea el botón de jugar mientras se espera respuesta
+    de la API 
+    https://www.npmjs.com/package/react-simple-loading*/}
+
+    {cargando ? <Loading  color={'#1976d2'}
+    stroke={'10px'}
+    size={'100px'}></Loading> : 
+    <div>    
 
     {/* Hacemos visible / invisible el botón */}
     {verBoton ?   
@@ -97,6 +110,8 @@ return (
         <p>Lo siento, ya has practicado hoy. ¡Vuelve mañana!</p>
     </div> : <></>
     }
+    
+    </div>}
 
 </div>      
 

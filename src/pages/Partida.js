@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react";
 import axios from "axios";
+import ResumenPartida from "../components/ResumenPartida";
 
 
 
@@ -8,6 +9,7 @@ export default function Partidas({preguntas}){
     const [envio, setEnvio] = useState(false);
     const [juegoActivo, setJuegoActivo] = useState(true);
     const [contador, setContador] = useState(0);
+    const [contador2, setContador2] = useState(0);
     const [respuestasUsuario, setRespuestasUsuario] = useState([]);
     const [resumen, setResumen] = useState([]);
 
@@ -81,8 +83,8 @@ export default function Partidas({preguntas}){
 return (  
     <div>
     <div className="tw-container tw-flex tw-flex-col tw-items-center">
-        <p className="tw-text-gray-700 tw-text-center">{preguntas[contador].pregunta}</p>
-        <img src={preguntas[contador].imagen} className="tw-flex tw-flex-col tw-mt-2 tw-items-center" alt="foto pregunta"></img>
+        <p className="tw-ml-2 tw-mr-2 tw-text-xl tw-text-center">{preguntas[contador].pregunta}</p>
+        <img src={preguntas[contador].imagen} className="tw-flex tw-flex-col tw-mt-3 tw-items-center" alt="foto pregunta"></img>
     </div> 
     <div className="tw-flex tw-flex-col tw-mt-5 tw-items-center">         
         <button id={preguntas[contador].id} name={preguntas[contador].respuesta1} onClick={handleOnClick} className="tw-w-60 tw-bg-blue-500 hover:tw-bg-blue-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded">{preguntas[contador].respuesta1}</button>
@@ -100,13 +102,25 @@ return (
     } else {
 
 // Resumen de partida
-    return (
 
-        <div>
+    let contador2 = 0;
+    let numAciertos = 0;
+
+    for (let i=0; i<resumen.length; i++){
+        if(resumen[i].pivot.acierto){
+            numAciertos++;
+        }
+    }
+    
+    return (        
+        <div className="tw-container tw-flex tw-flex-col">
         <div className="tw-text-center">
-            <h1>Resumen partida</h1>
-        </div>
-        
+            <p className="tw-text-xl">Resumen partida:<br>
+            </br>Aciertos {numAciertos} / 10</p>
+        </div>   
+        <div className="tw-mt-5">       
+        {resumen.map((resumen) => (<ResumenPartida key={resumen.id} resumen={resumen} contador={contador2=contador2+1}></ResumenPartida>))}
+        </div>          
         </div>
     );
 

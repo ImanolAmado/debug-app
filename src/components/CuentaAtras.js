@@ -27,7 +27,7 @@ export default function CuentaAtras({setVerCuentaAtras, setVerPartida}) {
         <CountdownCircleTimer
           isPlaying
           duration={3}
-          colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+          colors={["#004777", "#F7B801", "#A30000", "#0000FF"]}
           colorsTime={[10, 6, 3, 0]}
           onComplete={() => {
             setVerCuentaAtras(false);
