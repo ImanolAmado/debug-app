@@ -58,9 +58,8 @@ export default function Registro(){
         }
       
           axios.post("http://127.0.0.1:8000/api/registro", formulario)
-          .then((response) => {     
-           
-            console.log(response);
+          .then((response) => {    
+                       
             navigate("/login");
                       
           })
@@ -68,7 +67,7 @@ export default function Registro(){
             
             // Se controla el error lanzado,
             // nickname o email ya existentes
-            console.log(error.response.request.status);
+            
             if(error.response.request.status===402){
               setError((prevError) => ({ ...prevError, nickname: true }));
               setMensajeError((prevMensajeError) => ({ ...prevMensajeError, nickname: "Error, ese nickname ya existe" })); 
@@ -113,10 +112,7 @@ export default function Registro(){
         if(nombreValido===true && apellidoValido===true && nicknameValido===true
             && emailValido===true && fechaValida===true && passwordValido===true) {
             setCorrecto(true);
-        }
-       
-
-
+        }    
     }
 
     // Función para validar nombre del formulario
@@ -264,7 +260,7 @@ export default function Registro(){
 
 // Si el usuario ya está logueado, no le dejamos
 // ver la página de registro
-if (localStorage.getItem("miToken")){
+if (sessionStorage.getItem("miToken")){
    return (
           <Home></Home>
       );

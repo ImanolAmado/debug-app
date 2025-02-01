@@ -30,7 +30,7 @@ export default function Login(){
 
          
     let logueado = false;
-    if (localStorage.getItem("miToken")){   
+    if (sessionStorage.getItem("miToken")){   
         logueado = true;       
     } 
 
@@ -43,7 +43,7 @@ export default function Login(){
         axios.post("http://127.0.0.1:8000/api/login", formularioLogin)
         .then((response) => {                
             // guardamos token en localStorage                    
-            localStorage.setItem("miToken", response.data.token);            
+            sessionStorage.setItem("miToken", response.data.token);            
             // creamos objeto "datos" con los datos de usuario 
             // y lo pasamos a localStorage
             let datos = {
@@ -56,9 +56,8 @@ export default function Login(){
                 role:response.data.user.role,
                 created_at:response.data.user.created_at,
                 nickname:response.data.user.nickname
-            };      
-            console.log(datos);
-            localStorage.setItem("misdatos", JSON.stringify(datos));
+            };                  
+            sessionStorage.setItem("misdatos", JSON.stringify(datos));
             navigate(0); 
         })
         .catch((error) => {             

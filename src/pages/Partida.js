@@ -8,15 +8,14 @@ export default function Partidas({preguntas}){
 
     const [envio, setEnvio] = useState(false);
     const [juegoActivo, setJuegoActivo] = useState(true);
-    const [contador, setContador] = useState(0);
-    const [contador2, setContador2] = useState(0);
+    const [contador, setContador] = useState(0);  
     const [respuestasUsuario, setRespuestasUsuario] = useState([]);
     const [resumen, setResumen] = useState([]);
 
    
     let miToken="";
-    if(localStorage.getItem("miToken")){
-        miToken = localStorage.getItem('miToken'); 
+    if(sessionStorage.getItem("miToken")){
+        miToken = sessionStorage.getItem('miToken'); 
     }
 
 
@@ -37,12 +36,9 @@ export default function Partidas({preguntas}){
          
         // Si la respuesta es ok, cambiamos el estado de
         // juegoActivo para mostrar resumen del juego. Pasamos
-        // la respuesta recibida a resumen.
-            console.log(response.data);
-            console.log(response.status);           
+        // la respuesta recibida a resumen.                     
             setResumen(response.data);
-            setJuegoActivo(false);
-                           
+            setJuegoActivo(false);                          
             
         })
         .catch((error) => {             
@@ -72,7 +68,7 @@ export default function Partidas({preguntas}){
 
         // Si acaba la partida, se activa el envío
         else {
-            console.log("se acabó el juego");
+           
             setEnvio(true);
         }
     }
@@ -83,7 +79,7 @@ export default function Partidas({preguntas}){
 return (  
     <div>
     <div className="tw-container tw-flex tw-flex-col tw-items-center">
-        <p className="tw-ml-2 tw-mr-2 tw-text-xl tw-text-center">{preguntas[contador].pregunta}</p>
+        <p className="tw-ml-2 tw-mr-2 tw-text-center">{preguntas[contador].pregunta}</p>
         <img src={preguntas[contador].imagen} className="tw-flex tw-flex-col tw-mt-3 tw-items-center" alt="foto pregunta"></img>
     </div> 
     <div className="tw-flex tw-flex-col tw-mt-5 tw-items-center">         

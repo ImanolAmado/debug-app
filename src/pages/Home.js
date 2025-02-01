@@ -9,7 +9,7 @@ export default function Home(){
 // Si existen datos en localStorage, el usuario está
 // autenticado
 
-if (localStorage.getItem("miToken")){
+if (sessionStorage.getItem("miToken")){
     return(   
         <HomeLogin></HomeLogin>
     );

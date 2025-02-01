@@ -14,8 +14,7 @@ function App() {
         <div className="tw-flex-1 tw-overflow-auto">
         <Cabecera></Cabecera>
         <AppRoutes/>
-        </div>   
-       
+        </div>       
         <Menu/>             
     </div>
     </BrowserRouter>

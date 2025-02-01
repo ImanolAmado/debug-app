@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import Loading from 'react-simple-loading';
 import axios from "axios";
 import MenuRanking from "../components/MenuRanking";
+import { Link } from "react-router-dom";
 
 
 
-
-export default function Rankings(){
+export default function RankingSemanal(){
 
 
     const [cargando, setCargando] = useState(true);
@@ -17,7 +17,7 @@ export default function Rankings(){
 
     useEffect(() => {     
 
-        axios.get("http://127.0.0.1:8000/api/ranking")           
+        axios.get("http://127.0.0.1:8000/api/rankingsemanal")           
         
         .then((response) => {            
             console.log(response.data); 
@@ -42,12 +42,17 @@ export default function Rankings(){
 
     
     return(
-
-        <div>               
-            <MenuRanking></MenuRanking>
-           
-            {personas.map((persona)=>(<Lista key={contador} handleOnClick={handleOnClick} persona={persona} contador={contador++} ></Lista>))}
+        <div>
+        <MenuRanking></MenuRanking>
+        {personas.map((persona)=>(<Lista key={contador} handleOnClick={handleOnClick} persona={persona} contador={contador++} ></Lista>))}        
         </div>
     );
 
 }
+
+
+
+
+
+
+

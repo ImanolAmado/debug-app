@@ -10,8 +10,8 @@ const navigate = useNavigate();
 const [hacerLogout, setHacerLogout] = useState(true);
 let miToken = "";
 
-if(localStorage.getItem('miToken')){
-miToken = localStorage.getItem('miToken');
+if(sessionStorage.getItem('miToken')){
+miToken = sessionStorage.getItem('miToken');
 }
 
 useEffect(() => {
@@ -29,8 +29,8 @@ useEffect(() => {
         }
     )
     .then((response) => {         
-        localStorage.removeItem("miToken");  
-        localStorage.removeItem("misdatos"); 
+        sessionStorage.removeItem("miToken");  
+        sessionStorage.removeItem("misdatos"); 
         setHacerLogout(false); 
         navigate(0);
                        
