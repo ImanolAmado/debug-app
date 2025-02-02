@@ -1,6 +1,5 @@
 import Lista from "../components/Lista";
 import { useState, useEffect } from "react";
-import Loading from 'react-simple-loading';
 import axios from "axios";
 import MenuRanking from "../components/MenuRanking";
 
@@ -9,8 +8,7 @@ import MenuRanking from "../components/MenuRanking";
 
 export default function Rankings(){
 
-
-    const [cargando, setCargando] = useState(true);
+   
     const [personas, setPersonas] = useState([]);
     let contador = 1;
 
@@ -29,10 +27,7 @@ export default function Rankings(){
                   
             } 
         })   
-        .finally(() => {
-            setCargando(false);
-        })
-    
+           
     },[]);
 
 

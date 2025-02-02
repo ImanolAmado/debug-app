@@ -3,7 +3,6 @@ import axios from "axios";
 import ResumenPartida from "../components/ResumenPartida";
 
 
-
 export default function Partidas({preguntas}){
 
     const [envio, setEnvio] = useState(false);
@@ -42,10 +41,7 @@ export default function Partidas({preguntas}){
             
         })
         .catch((error) => {             
-            if (error != "AxiosError: Request failed with status code 422")
-            {  
-           
-            }          
+           console.log(error.error);  
         })   
     
     },[envio]);

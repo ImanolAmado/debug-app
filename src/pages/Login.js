@@ -90,7 +90,6 @@ export default function Login(){
         }
 
 
-
 if(!logueado) {
 
 return (
@@ -102,13 +101,10 @@ return (
       noValidate
       autoComplete="off"
     >
-    <div className="tw-text-center tw-mt-4">
-        <h1>Login</h1>        
-    </div>
-    
-    <div className='tw-flex tw-flex-col tw-mt-5 tw-items-center tw-mt-2'>        
-        
-         <TextField 
+    <div className="tw-mr-5 tw-ml-5 tw-text-center tw-mt-20 tw-border">
+        <h1 className="tw-pt-5">Login</h1>            
+        <div className='tw-flex tw-flex-col tw-items-center tw-mb-5'>      
+         <TextField          
           required  
           error={error.email}  
           helperText={mensajeError.email}   
@@ -139,6 +135,7 @@ return (
           onChange = {handleOnChange}
           value={formularioLogin.password} 
         />
+    </div>
     </div>
 </Box>
 

@@ -1,11 +1,5 @@
 
-
-
-
-
-
 export default function ResumenPartida({resumen, contador}){
-
 
 
 return (

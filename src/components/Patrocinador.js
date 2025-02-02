@@ -1,10 +1,5 @@
 
-
-
-
-
 export default function Patrocinador({patrocinador}){
-
 
 return (
 

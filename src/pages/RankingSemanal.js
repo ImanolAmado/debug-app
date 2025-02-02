@@ -1,16 +1,13 @@
 import Lista from "../components/Lista";
 import { useState, useEffect } from "react";
-import Loading from 'react-simple-loading';
 import axios from "axios";
 import MenuRanking from "../components/MenuRanking";
-import { Link } from "react-router-dom";
 
 
 
 export default function RankingSemanal(){
 
 
-    const [cargando, setCargando] = useState(true);
     const [personas, setPersonas] = useState([]);
     let contador = 1;
 
@@ -29,10 +26,7 @@ export default function RankingSemanal(){
                   
             } 
         })   
-        .finally(() => {
-            setCargando(false);
-        })
-    
+           
     },[]);
 
 
