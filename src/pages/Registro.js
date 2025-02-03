@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Home from './Home';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { apiClient } from '../components/apiClient';
 
 
 
@@ -57,7 +57,7 @@ export default function Registro(){
           return;
         }
       
-          axios.post("http://127.0.0.1:8000/api/registro", formulario)
+          apiClient.post("/registro", formulario)
           .then((response) => {    
                        
             navigate("/login");

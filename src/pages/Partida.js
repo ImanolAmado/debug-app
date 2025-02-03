@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
-import axios from "axios";
 import ResumenPartida from "../components/ResumenPartida";
+import { apiClient } from "../components/apiClient";
 
 
 export default function Partidas({preguntas}){
@@ -24,7 +24,7 @@ export default function Partidas({preguntas}){
         return;
         }
 
-        axios.post("http://127.0.0.1:8000/api/partida", respuestasUsuario,
+        apiClient.post("/partida", respuestasUsuario,
             {
             headers: {
             Authorization: `Bearer ${miToken}`,

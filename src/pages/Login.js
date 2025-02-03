@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Home from "./Home";
+import { apiClient } from "../components/apiClient";
 
 
 
@@ -40,7 +40,7 @@ export default function Login(){
         // Para evitar que se ejecute al renderizar la página
         if (hacerLogin === false) return;
     
-        axios.post("http://127.0.0.1:8000/api/login", formularioLogin)
+        apiClient.post('/login', formularioLogin)
         .then((response) => {                
             // guardamos token en localStorage                    
             sessionStorage.setItem("miToken", response.data.token);            

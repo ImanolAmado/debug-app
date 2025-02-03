@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import Loading from 'react-simple-loading';
 import { useEffect, useState } from 'react';
 import Login from './Login';
 import ResumenPartida from '../components/ResumenPartida';
+import { apiClient } from "../components/apiClient";
 import Button from '@mui/material/Button';
 
   
@@ -63,7 +63,7 @@ export default function Partidas() {
     // Llamada Api
     useEffect(() => {    
        
-        axios.get("http://127.0.0.1:8000/api/userstats",
+        apiClient.get("/userstats",
             {
             headers: {
             Authorization: `Bearer ${miToken}`,

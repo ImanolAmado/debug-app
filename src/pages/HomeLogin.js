@@ -1,6 +1,6 @@
 import CuentaAtras from "../components/CuentaAtras";
 import Partida from "./Partida";
-import axios from "axios";
+import { apiClient } from "../components/apiClient";
 import { useEffect, useState } from "react";
 import Loading from 'react-simple-loading';
 import Patrocinador from "../components/Patrocinador";
@@ -88,7 +88,7 @@ miToken = sessionStorage.getItem('miToken');
 
 useEffect(() => {       
 
-    axios.get("http://127.0.0.1:8000/api/partida",
+    apiClient.get("/partida",
         {
         headers: {
         Authorization: `Bearer ${miToken}`,

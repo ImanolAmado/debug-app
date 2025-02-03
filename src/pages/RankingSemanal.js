@@ -1,7 +1,8 @@
 import Lista from "../components/Lista";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import MenuRanking from "../components/MenuRanking";
+import { apiClient } from "../components/apiClient";
+
 
 
 
@@ -14,7 +15,7 @@ export default function RankingSemanal(){
 
     useEffect(() => {     
 
-        axios.get("http://127.0.0.1:8000/api/rankingsemanal")           
+        apiClient.get("/rankingsemanal")           
         
         .then((response) => {            
             console.log(response.data); 

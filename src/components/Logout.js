@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeNoLogin from "../pages/HomeNoLogin";
+import { apiClient } from "./apiClient";
 
 
 export default function Logout(){
@@ -21,7 +21,7 @@ useEffect(() => {
         return; 
     }
     
-    axios.post("http://127.0.0.1:8000/api/logout",  {},
+    apiClient.post("/logout",  {},
         {
             headers: {
               Authorization: `Bearer ${miToken}`,
