@@ -6,6 +6,7 @@ import Registro from './pages/Registro';
 import Login from './pages/Login';
 import Logout from './components/Logout';
 import RankingSemanal from './pages/RankingSemanal';
+import CambioAvatar from './pages/CambioAvatar';
 import { Route, Routes } from 'react-router-dom';
 
 
@@ -21,6 +22,7 @@ return (
     <Route path="/login" element={<Login/>}/>
     <Route path="/logout" element={<Logout/>}/>
     <Route path="/rankingSemanal" element={<RankingSemanal/>}/>
+    <Route path="/avatar" element={<CambioAvatar/>}/>
 </Routes>
 );
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiClient } from "../components/apiClient";
 import Loading from 'react-simple-loading';
+import { Button } from "@mui/material";
 
 
 export default function Usuario(){
@@ -66,11 +67,18 @@ export default function Usuario(){
             stroke={'10px'}
             size={'100px'}></Loading> : 
             <div>
-            <div className="tw-bg-gray-200 tw-mr-8 tw-ml-8 tw-rounded-2xl tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <img className="tw-pt-4" src={datos.avatar} width="30%" alt="foto avatar"></img>
-                <p className="tw-mt-2">{datos.nombre} {datos.apellido}</p>
-                <p className="tw-pb-4">({datos.nickname})</p>
-                <p className="tw-pb-4">{datos.email}</p>
+            <div className="tw-bg-gray-200 tw-mr-8 tw-ml-8 tw-rounded-2xl">
+               {/*  <div className="tw-flex tw-justify-end">
+                    <Button><Link to="/avatar"><img src="editpic.png" width="25" alt="foto avatar"></img></Link></Button>
+                </div> */}
+                <div className="tw-pt-5 tw-flex tw-flex-col tw-justify-center tw-items-center">
+                <img src={datos.avatar} width="35%" alt="foto avatar"></img>                                   
+                </div>
+                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                    <p className="tw-mt-2">{datos.nombre} {datos.apellido}</p>
+                    <p className="tw-pb-4">({datos.nickname})</p>
+                    <p className="tw-pb-4">{datos.email}</p>
+                </div>
             </div>
             <div className="tw-mt-2 tw-flex tw-flex-col tw-justify-center tw-items-center">
                 <p className="tw-font-semibold">Total puntos: {respuestasAcertadas}</p>
@@ -80,7 +88,7 @@ export default function Usuario(){
                 <p>Ratio aciertos: {ratio}%</p>
             </div>
             <div className="tw-mt-10">
-                <h3 className="tw-text-xl tw-text-center tw-text-blue-700 tw-underline"><Link to="/logout">Logout</Link></h3>
+                <h3 className="tw-text tw-text-center tw-text-blue-700 tw-underline"><Link to="/logout">Logout</Link></h3>
             </div>
             </div> }           
         </div>
