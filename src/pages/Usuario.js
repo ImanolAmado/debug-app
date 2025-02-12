@@ -72,7 +72,7 @@ export default function Usuario(){
                     <Button><Link to="/avatar"><img src="editpic.png" width="25" alt="foto avatar"></img></Link></Button>
                 </div> */}
                 <div className="tw-pt-5 tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <img src={datos.avatar} width="35%" alt="foto avatar"></img>                                   
+                <img src={`https://admin.debugacademia.com/storage/${datos.avatar}`} width="35%" alt="foto avatar"></img>                                   
                 </div>
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                     <p className="tw-mt-2">{datos.nombre} {datos.apellido}</p>

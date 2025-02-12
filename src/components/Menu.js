@@ -18,8 +18,7 @@ export default function Menu() {
         showLabels
         value={value}
         onChange={(event, newValue) => {
-          setValue(newValue);
-         
+          setValue(newValue);       
           
         }}
       >

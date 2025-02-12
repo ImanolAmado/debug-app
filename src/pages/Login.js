@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Home from "./Home";
 import { apiClient } from "../components/apiClient";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login(){
 
+    let logueado = false;
+    const [hacerLogin, setHacerLogin] = useState(false);
     const navigate = useNavigate();
     
+
     const [error, setError] = useState({
         email: false,
         password: false
@@ -20,26 +22,25 @@ export default function Login(){
         email: "",
         password: ""
     });
-    const [hacerLogin, setHacerLogin] = useState(false);
+  
     const [formularioLogin, setFormularioLogin] = useState(
         {     
          email: "",
          password: ""
         }
     );
-
          
-    let logueado = false;
-    if (sessionStorage.getItem("miToken")){   
-        logueado = true;       
+
+    if (sessionStorage.getItem("miToken")) {   
+    logueado = true;      
     } 
+   
 
       
     useEffect(() => {
-    
-        // Para evitar que se ejecute al renderizar la página
-        if (hacerLogin === false) return;
-    
+
+        if(hacerLogin===false) return;
+        
         apiClient.post('/login', formularioLogin)
         .then((response) => {                
             // guardamos token en localStorage                    
@@ -57,8 +58,9 @@ export default function Login(){
                 created_at:response.data.user.created_at,
                 nickname:response.data.user.nickname
             };                  
-            sessionStorage.setItem("misdatos", JSON.stringify(datos));
-            navigate(0); 
+            sessionStorage.setItem("misdatos", JSON.stringify(datos));  
+            navigate("/");              
+           
         })
         .catch((error) => {             
             if (error != "AxiosError: Request failed with status code 422")
@@ -67,16 +69,14 @@ export default function Login(){
             setMensajeError((prevMensajeError) => ({ ...prevMensajeError, password: "Usuario o password incorrecto" }));
             }          
         })   
-    
-        // reseteamos a "false" 
+          
         .finally(() => {
-            setHacerLogin(false);
+                 
         });
     
-    },[hacerLogin, formularioLogin]);
+    },[hacerLogin]);
     
-    
-    
+        
         function handleOnChange(event){
             const { value, name } = event.target;    
             setFormularioLogin({...formularioLogin,
@@ -90,7 +90,7 @@ export default function Login(){
         }
 
 
-if(!logueado) {
+if(logueado==false) {
 
 return (
 

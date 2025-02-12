@@ -3,8 +3,7 @@ import HomeLogin from './HomeLogin';
 import '../index.css';
 
 
-export default function Home(){
-    
+export default function Home(){    
 
 // Si existen datos en localStorage, el usuario está
 // autenticado

@@ -7,7 +7,7 @@ export default function Home(){
     return(
     <div className='tw-mt-5 tw-mr-5 tw-ml-5'>
         <div className='tw-text-center'>
-            <h1 className='tw-text-xl'>¡Bienvenid@ a DebugAcademia!</h1>
+            <h1 className='tw-text-xl tw-text-blue-500'>¡Bienvenid@ a DebugAcademia!</h1>
             <p>Tu compañero de estudios DAW/DAM</p>
         </div>
         <div className="tw-container tw-grid tw-grid-cols-3 tw-gap-2 tw-mt-5">

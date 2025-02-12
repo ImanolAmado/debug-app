@@ -76,7 +76,7 @@ return (
     <div>
     <div className="tw-container tw-flex tw-flex-col tw-items-center">
         <p className="tw-ml-2 tw-mr-2 tw-text-center">{preguntas[contador].pregunta}</p>
-        <img src={preguntas[contador].imagen} className="tw-flex tw-flex-col tw-mt-3 tw-items-center" alt="foto pregunta"></img>
+        <img src={`https://admin.debugacademia.com/storage/${preguntas[contador].imagen}`} className="tw-flex tw-flex-col tw-mt-3 tw-items-center" alt="foto pregunta"></img>
     </div> 
     <div className="tw-flex tw-flex-col tw-mt-5 tw-items-center">         
         <button id={preguntas[contador].id} name={preguntas[contador].respuesta1} onClick={handleOnClick} className="tw-w-60 tw-bg-blue-500 hover:tw-bg-blue-900 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded">{preguntas[contador].respuesta1}</button>

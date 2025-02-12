@@ -15,7 +15,7 @@ return (
       <p className="tw-mt-4 tw-pl-2">{resumen.pregunta}</p>  
     <img
       className="tw-tw-rounded-t-lg tw-mt-3"
-      src={resumen.imagen}
+      src={`https://admin.debugacademia.com/storage/${resumen.imagen}`}
       alt="foto pregunta" ></img>
 
     <div className="tw-mt-3 tw-text-surface">

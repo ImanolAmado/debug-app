@@ -87,13 +87,11 @@ export default function Partidas() {
             let respuestasAcertadas = 0;
             let puntos = 0;
 
-            for(let j=0; j<10; j++){
-
+                for(let j=0; j<10; j++){
             // cálculo de la puntuación de la partida
              if(response.data[i][j].pivot.acierto==true){
                  respuestasAcertadas++;
              }
-
              id = response.data[i][j].pivot.partida_id;
              fecha = response.data[i][j].pivot.fecha;
              resumen = "Aciertos: " + respuestasAcertadas + " de 10";

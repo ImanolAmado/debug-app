@@ -22,21 +22,18 @@ export default function Lista({persona, contador, handleOnClick}) {
         // función onClick que manejaremos en 'Ranking'
         onClick={function() {
           handleOnClick(persona.id)}
-        } >                     
-
+        } >        
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap:0 , minWidth: '40%' }}>
             <ListItemAvatar>
-              <Avatar alt="avatar usuario" src={persona.avatar} />
+              <Avatar alt="avatar usuario" src={`https://admin.debugacademia.com/storage/${persona.avatar}`} />
             </ListItemAvatar>
             <ListItemText primary={contador} />
           </Box>
 
-
           <Box sx={{ minWidth: '30%', flexShrink: 0 }}>
             <ListItemText primary={persona.nickname} />
           </Box>
-
        
           <ListItemText primary={persona.total} sx={{ textAlign: 'right', minWidth: '30%' }} />
         </ListItemButton>
