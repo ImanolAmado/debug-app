@@ -26,7 +26,7 @@ export default function Lista({persona, contador, handleOnClick}) {
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap:0 , minWidth: '40%' }}>
             <ListItemAvatar>
-              <Avatar alt="avatar usuario" src={`https://admin.debugacademia.com/storage/${persona.avatar}`} />
+              <Avatar alt="avatar usuario" src={persona.avatar}/>
             </ListItemAvatar>
             <ListItemText primary={contador} />
           </Box>

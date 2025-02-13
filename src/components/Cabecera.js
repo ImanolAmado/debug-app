@@ -31,7 +31,7 @@ logueado=true;
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <img src="/debugLogo.png" width={100} alt="Logo debug-academia"></img>
           </Typography>
-          <Link to={"/usuario"}><button><img className="tw-mr-3 tw-mt-2" src={`https://admin.debugacademia.com/storage/${datos.avatar}`} width={40} alt="imagen avatar"></img></button></Link>
+          <Link to={"/usuario"}><button><img className="tw-mr-3 tw-mt-2" src={datos.avatar} width={40} alt="imagen avatar"></img></button></Link>
         </Toolbar>
         :
         <Toolbar>         
